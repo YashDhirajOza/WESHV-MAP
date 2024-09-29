@@ -33,18 +33,29 @@ const pickerNames = ['Deepak Singh', 'Mohammed Rafi', 'Sanjay Kumar', 'Ramesh So
 function addMarkers(type, names, icon) {
     for (let i = 0; i < names.length; i++) {
         const coord = getRandomCoord(ahmedabadCoords, 5);
-        const marker = L.marker(coord, { icon: icon }).addTo(map);
+        const marker = L.marker(coord, {icon: icon}).addTo(map);
         
         let popupContent = <b>${type}:</b> ${names[i]}<br>;
         const id = generateUniqueId();
         markers[id] = { type: type, name: names[i], marker: marker, coord: coord };
 
         if (type === 'Food Donor') {
+            const freshness = Math.floor(Math.random() * 10) + 1;
+            const healthiness = Math.floor(Math.random() * 10) + 1;
             const foodId = generateUniqueId();
-            popupContent += Food ID: ${foodId}<br>;
-            markers[id].foodId = foodId;  // Assign foodId to donor
+            popupContent += `Freshness: ${freshness}/10<br>
+                             Healthiness: ${healthiness}/10<br>
+                             Food ID: ${foodId}<br>
+                             Allergy Info: ${getAllergyInfo()}<br>`;
+            markers[id].foodId = foodId;
         }
-
+        if (type === 'Delivery Location') {
+            const urgency = Math.floor(Math.random() * 3) + 1;
+            const urgencyColors = ['#ffcccb', '#ff6666', '#ff0000'];
+            popupContent += Urgency: <span class="urgency-marker" style="background-color: ${urgencyColors[urgency-1]};"></span>;
+            markers[id].urgency = urgency;
+        }
+        
         marker.bindPopup(<div class="popup-content">${popupContent}</div>);
 
         marker.on('mouseover', function () {
@@ -54,6 +65,12 @@ function addMarkers(type, names, icon) {
             this.closePopup();
         });
     }
+}
+
+function getAllergyInfo() {
+    const allergens = ['Nuts', 'Dairy', 'Gluten', 'Eggs', 'Soy', 'Fish'];
+    const selectedAllergens = allergens.filter(() => Math.random() > 0.7);
+    return selectedAllergens.length > 0 ? selectedAllergens.join(', ') : 'None';
 }
 
 // Add markers to the map
