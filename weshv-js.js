@@ -33,7 +33,7 @@ const sampleData = {
     host: ['Sarvodaya Community Center', 'Amul School Host', 'Sankalp Bhavan'],
     picker: ['Deepak Singh', 'Mohammed Rafi', 'Sanjay Kumar', 'Ramesh Solanki', 'Arjun Yadav'],
     school: ['City Public School', 'Bright Future School', 'Knowledge Academy'],
-    blindSchool: ['Blind People's Association', 'Andh Kanya Prakash Gruh'],
+    blindSchool: ['Blind Peoples Association', 'Andh Kanya Prakash Gruh'],
     oldAgeHome: ['Jeevan Sandhya Old Age Home', 'Seva Senior Citizen Home'],
     specialAidHome: ['Apang Manav Mandal', 'Disabled Welfare Trust of India'],
     jail: ['Sabarmati Central Jail', 'Ahmedabad District Jail']
